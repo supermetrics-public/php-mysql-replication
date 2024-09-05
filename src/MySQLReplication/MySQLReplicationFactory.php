@@ -70,8 +70,7 @@ class MySQLReplicationFactory
                     $repository,
                     $cache,
                     $config,
-                    $this->binLogSocketConnect->getBinLogServerInfo(),
-                    $logger
+                    $this->binLogSocketConnect->getBinLogServerInfo()
                 )
             ),
             $this->eventDispatcher,

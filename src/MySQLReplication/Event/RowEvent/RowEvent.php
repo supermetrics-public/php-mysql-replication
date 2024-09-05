@@ -21,7 +21,6 @@ use MySQLReplication\Exception\MySQLReplicationException;
 use MySQLReplication\JsonBinaryDecoder\JsonBinaryDecoderService;
 use MySQLReplication\Repository\FieldDTO;
 use MySQLReplication\Repository\RepositoryInterface;
-use Psr\Log\LoggerInterface;
 use RuntimeException;
 
 class RowEvent extends EventCommon
@@ -294,7 +293,6 @@ class RowEvent extends EventCommon
         private readonly TableMapCache $tableMapCache,
         private readonly Config $config,
         protected BinLogServerInfo $binLogServerInfo,
-        private readonly LoggerInterface $logger
     ) {
         parent::__construct($eventInfo, $binaryDataReader, $binLogServerInfo);
     }
@@ -436,8 +434,6 @@ class RowEvent extends EventCommon
         if ($this->tableMapCache->has($tableId)) {
             return $this->tableMapCache->get($tableId);
         }
-
-        $this->logger->info('No table map found for table ID: ' . $tableId);
 
         return null;
     }
